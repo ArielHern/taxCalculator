@@ -61,19 +61,24 @@ class TaxResource:
 
         
         def calculate(self,salary, status,code=False):
-                if code is False:
-                        try:
-                                rv = tuple(x for x in self.taxrange if x.get_endSalary() >= salary and x.get_startSalary() <= salary
+                try:
+                        rv = list(x for x in self.taxrange if x.get_endSalary() >= salary and x.get_startSalary() <= salary
                                 and x.get_taxCode() ==status)
                                         
-                        except:
-                                return ('Did you enter $ and correct status?')
+                except:
+                        return ('Did you enter $ and correct status?')
+                else:
+                        if len(rv)==0:
+                                return ('Wrong status in arg. two.')
                         else:
                                 return rv
-                else:
-                         rv =  list(x.get_code() for x in self.taxrange if x.get_endSalary() >= salary and x.get_startSalary() <= salary
-                                and x.get_taxCode() ==status)
-                         return rv
+                finally:
+                        if code:
+                                #get the tax rate code
+                                rv =  list(x.get_code() for x in self.taxrange if x.get_endSalary() >= salary and x.get_startSalary() <= salary
+                                              and x.get_taxCode() ==status)
+                        
+                                return rv
                
        
 
