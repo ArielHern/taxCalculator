@@ -42,13 +42,13 @@ class TaxResource:
 
 
         #Head of household
-        taxrange.append(TaxRange.from_model(taxModel_2020_HH,0, 14100.99,.1,'HH1'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_HH,14101,53700.99,.12,'HH2'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_HH,53701,85500.99,.22,'HH3'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_HH,85501,16300.99,.24,'HH4'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_HH,163301,207350.99,.32,'HH5'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_HH,207351,518400.99,.35,'HH6'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_HH,518401,9999999.99,.37,'HH7'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_HH,0, 13850.99,.1,'HH1'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_HH,13851,52850.99,.12,'HH2'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_HH,528501,84200.99,.22,'HH3'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_HH,84201,160700.99,.24,'HH4'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_HH,160701,204100.99,.32,'HH5'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_HH,204101,510300.99,.35,'HH6'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_HH,510301,9999999.99,.37,'HH7'))
 
         # 'QW', 'Qualified Widow(er)'
         taxrange.append(TaxRange.from_model(taxModel_2020_QW, 0 ,19400.99 ,.1,'QW1'))
