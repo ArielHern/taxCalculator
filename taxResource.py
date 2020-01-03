@@ -1,6 +1,7 @@
 # In TaxResource
 
-from taxModel import TaxModel,TaxRange
+from taxModel import TaxModel
+from taxRange import TaxRange
 
 class TaxResource:
 

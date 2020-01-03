@@ -1,11 +1,11 @@
 # In app.py
 
 from PyQt5 import QtWidgets
-from PyQt5 import QtCore, QtGui, QtWidgets
+
 import sys
 
 from taxrateGUI import Ui_MainWindow
-from taxResourceModel import TaxResource
+from taxResource import TaxResource
 
 
 
@@ -17,51 +17,50 @@ class myApp(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         self.ui.pushButton.clicked.connect(self.calculateTaxes)
+        self.msg = QtWidgets.QErrorMessage()
+        self.msg.setWindowTitle('Error')
+        
+        
 
     def calculateTaxes(self):
-        calculator = TaxResource()
-        salary = int(self.ui.txtSalary.text())
-        status = self.get_status()
-        
-        
-        # return the code
-        rv = calculator.calculate(salary, status,True)        
-        code = rv 
-        
-        # print((code[0]))
-        self.set_color(code)
-        
+        calculator = TaxResource()        
+        try:
+            salary = int(self.ui.txtSalary.text())            
+        except ValueError:
+            self.msg.showMessage('Enter Annual Salary')
+        else:
+            status = self.get_status()    
+            
+            if status == 'All':
+                stat = ('S', 'MFJ','MFS', 'QW','HH')
+                for st in stat:
+                    code = calculator.calculate(salary, st,True)
+                    self.set_color(code[0])        
+            else:
+                code = calculator.calculate(salary, status,True)   
+                self.set_color(code[0])          
         
 
     def set_color(self,code):
         labels = self.findChildren(QtWidgets.QFrame)
         for label in labels:
-             if code[0]==label.objectName():
-                 label.setStyleSheet('background:#A9A9A9')
-            
-        
-
-    def all_label(self):
-        children = self.findChildren(QtWidgets.QFrame)
-        for child in children:
-            print(child.objectName())
-        
-        
-
+             if code==label.objectName():
+                 label.setStyleSheet('background:#A9A9A9') 
+       
 
     def get_status(self):
-        if  self.ui.rbSingle.isChecked()==True:
+        if  self.ui.rbSingle.isChecked():
             return 'S'
-        elif self.ui.rbMarriedFilingJointly.isChecked()==True:
+        elif self.ui.rbMarriedFilingJointly.isChecked():
             return 'MFJ'
-        elif self.ui.rbMarriedFillingSingle.isChecked()==True:
+        elif self.ui.rbMarriedFillingSingle.isChecked():
             return 'MFS'
-        elif self.ui.rbQualifiedWindow.isChecked()==True:
+        elif self.ui.rbQualifiedWindow.isChecked():
             return 'QW'
-        elif self.ui.rbHeadofHouseHold.isChecked()==True:
+        elif self.ui.rbHeadofHouseHold.isChecked():
             return 'HH'
-
-
+        elif self.ui.rbAll.isChecked():
+            return 'All'
 
 
 

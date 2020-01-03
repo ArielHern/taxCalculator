@@ -1,16 +1,20 @@
 # In test.py
 
 import unittest
-from taxModel import TaxModel, TaxRange
-# from taxResourceModel import TaxResource
+from taxModel import TaxModel
+from taxRange import TaxRange
+from taxResource import TaxResource
 
-# taxtest = TaxResource()
+taxResouces = TaxResource()
 
 taxModel_2020_S = TaxModel(2020, 'S', 'Single')
 taxrange = TaxRange.from_model(taxModel_2020_S,0, 9325.99, 0.1,"S1")
 
 
 class TaxModelTest(unittest.TestCase):
+    def test_Taxresource(self):
+        self.assertEqual(taxResouces.calculate(200000,'HH',True), ['HH5'])
+
     def test_get_year(self):
         self.assertEqual(taxrange.get_year(), 2020)
 
