@@ -7,4 +7,4 @@ taxfinder = TaxResource()
 
 
 if __name__ == "__main__":
-    print(taxfinder.calculate(85000,'MFJ'))
+    print(taxfinder.calculate(85000,'QW'))

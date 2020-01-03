@@ -5,11 +5,10 @@ from taxModel import TaxModel,TaxRange
 class TaxResource:
 
         taxModel_2020_S = TaxModel(2020, 'S', 'Single')
-        taxModel_2020_MFJ = TaxModel(2020, 'MFJ', 'Married Filing Jointly')
-        taxModel_2020_QW = TaxModel(2020, 'QW', 'Qualified Widow(er)')
+        taxModel_2020_MFJ = TaxModel(2020, 'MFJ', 'Married Filing Jointly')        
         taxModel_2020_MFS = TaxModel(2020, 'MFS', 'Married Filing Separately')
         taxModel_2020_HH = TaxModel(2020, 'HH', 'Head of Household')
-
+        taxModel_2020_QW = TaxModel(2020, 'QW', 'Qualified Widow(er)')
         taxrange = []
 
         # single
@@ -33,12 +32,12 @@ class TaxResource:
 
         # Married, filing separately
         taxrange.append(TaxRange.from_model(taxModel_2020_MFS,0,9700.99,.1,'MFS1'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,9876,40125.99,.12,'MFS2'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,40126,85525.99,.22,'MFS3'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,85526,163300.99,.24,'MFS4'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,163301,207350.99,.32,'MFS5'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,207351,311025.99,.35,'MFS6'))
-        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,311026,9999999.99,.37,'MFS7'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,9701,39475.99,.12,'MFS2'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,39476,84200.99,.22,'MFS3'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,84201,160725.99,.24,'MFS4'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,160726,204100.99,.32,'MFS5'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,204101,306175.99,.35,'MFS6'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_MFS,306176,9999999.99,.37,'MFS7'))
 
 
         #Head of household
@@ -50,21 +49,36 @@ class TaxResource:
         taxrange.append(TaxRange.from_model(taxModel_2020_HH,207351,518400.99,.35,'HH6'))
         taxrange.append(TaxRange.from_model(taxModel_2020_HH,518401,9999999.99,.37,'HH7'))
 
+        # 'QW', 'Qualified Widow(er)'
+        taxrange.append(TaxRange.from_model(taxModel_2020_QW, 0 ,19400.99 ,.1,'QW1'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_QW, 19401, 78950.99, .12, 'QW2'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_QW, 78951 ,168400.99 ,.22,'QW3'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_QW, 168401,321450.99 ,.24,'QW4'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_QW, 321451 ,408200.99 ,.32,'QW5'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_QW, 408201,612350.99 ,.35,'QW6'))
+        taxrange.append(TaxRange.from_model(taxModel_2020_QW, 612351 ,9999999.99 ,.37,'QW7'))
+
 
         
-        def calculate(self,salary, status):
-                try:
-                        rv = tuple(x for x in self.taxrange if x.get_endSalary() >= salary and x.get_startSalary() <= salary
-                        and x.get_taxCode() ==status)
+        def calculate(self,salary, status,code=False):
+                if code is False:
+                        try:
+                                rv = tuple(x for x in self.taxrange if x.get_endSalary() >= salary and x.get_startSalary() <= salary
+                                and x.get_taxCode() ==status)
                                         
-                except:
-                        return ('Did you enter $ and correct status?')
+                        except:
+                                return ('Did you enter $ and correct status?')
+                        else:
+                                return rv
                 else:
-                        return rv
+                         rv =  list(x.get_code() for x in self.taxrange if x.get_endSalary() >= salary and x.get_startSalary() <= salary
+                                and x.get_taxCode() ==status)
+                         return rv
                
-                
+       
+
         
                 
-
+        
 
  

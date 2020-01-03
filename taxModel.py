@@ -33,14 +33,15 @@ class TaxRange(TaxModel):
 
 
     def __repr__(self):
-        return (f'Code : {self.get_code()},\n'
+        return (
+                f'Code : {self.get_code()},\n'
                 f'Tax Rate : {self.get_taxRate()},\n' 
                 f'Start Salary: {self.get_startSalary()},\n' 
                 f'End Salary: {self.get_endSalary()},\n'  
                 f'Status: {self.get_taxCode()},\n' 
-                f'Description: {self.get_description()}')
-        
-        
+                f'Description: {self.get_description()}')           
+    
+
     def get_startSalary(self):
         return self.start_salary
     

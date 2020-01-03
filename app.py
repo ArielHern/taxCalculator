@@ -1,5 +1,7 @@
+# In app.py
+
 from PyQt5 import QtWidgets
-# from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
 from taxrateGUI import Ui_MainWindow
@@ -21,10 +23,32 @@ class myApp(QtWidgets.QMainWindow):
         salary = int(self.ui.txtSalary.text())
         status = self.get_status()
         
-        rv = calculator.calculate(salary, status)       
-        self.ui.displayTextField.setPlainText(str(rv))
+        
+        # return the code
+        rv = calculator.calculate(salary, status,True)        
+        code = rv 
+        
+        # print((code[0]))
+        self.set_color(code)
         
         
+
+    def set_color(self,code):
+        labels = self.findChildren(QtWidgets.QFrame)
+        for label in labels:
+             if code[0]==label.objectName():
+                 label.setStyleSheet('background:#A9A9A9')
+            
+        
+
+    def all_label(self):
+        children = self.findChildren(QtWidgets.QFrame)
+        for child in children:
+            print(child.objectName())
+        
+        
+
+
     def get_status(self):
         if  self.ui.rbSingle.isChecked()==True:
             return 'S'
@@ -33,7 +57,7 @@ class myApp(QtWidgets.QMainWindow):
         elif self.ui.rbMarriedFillingSingle.isChecked()==True:
             return 'MFS'
         elif self.ui.rbQualifiedWindow.isChecked()==True:
-            return 'QF'
+            return 'QW'
         elif self.ui.rbHeadofHouseHold.isChecked()==True:
             return 'HH'
 
