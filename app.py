@@ -8,7 +8,6 @@ from taxrateGUI import Ui_MainWindow
 from taxResource import TaxResource
 
 
-
 class myApp(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
@@ -19,37 +18,33 @@ class myApp(QtWidgets.QMainWindow):
         self.ui.pushButton.clicked.connect(self.calculateTaxes)
         self.msg = QtWidgets.QErrorMessage()
         self.msg.setWindowTitle('Error')
-        
-        
 
     def calculateTaxes(self):
-        calculator = TaxResource()        
+        calculator = TaxResource()
         try:
-            salary = int(self.ui.txtSalary.text())            
+            salary = int(self.ui.txtSalary.text())
         except ValueError:
             self.msg.showMessage('Enter Annual Salary')
         else:
-            status = self.get_status()    
-            
-            if status == 'All':
-                stat = ('S', 'MFJ','MFS', 'QW','HH')
-                for st in stat:
-                    code = calculator.calculate(salary, st,True)
-                    self.set_color(code[0])        
-            else:
-                code = calculator.calculate(salary, status,True)   
-                self.set_color(code[0])          
-        
+            status = self.get_status()
 
-    def set_color(self,code):
+            if status == 'All':
+                stat = ('S', 'MFJ', 'MFS', 'QW', 'HH')
+                for st in stat:
+                    code = calculator.calculate(salary, st, True)
+                    self.set_color(code[0])
+            else:
+                code = calculator.calculate(salary, status, True)
+                self.set_color(code[0])
+
+    def set_color(self, code):
         labels = self.findChildren(QtWidgets.QFrame)
         for label in labels:
-             if code==label.objectName():
-                 label.setStyleSheet('background:#A9A9A9') 
-       
+            if code == label.objectName():
+                label.setStyleSheet('background:#A9A9A9')
 
     def get_status(self):
-        if  self.ui.rbSingle.isChecked():
+        if self.ui.rbSingle.isChecked():
             return 'S'
         elif self.ui.rbMarriedFilingJointly.isChecked():
             return 'MFJ'
@@ -61,7 +56,6 @@ class myApp(QtWidgets.QMainWindow):
             return 'HH'
         elif self.ui.rbAll.isChecked():
             return 'All'
-
 
 
 if __name__ == "__main__":
