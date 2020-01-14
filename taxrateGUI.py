@@ -435,7 +435,7 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(560, 0, 81, 71))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("money-bag.png"))
+        self.label.setPixmap(QtGui.QPixmap("images/money-bag.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)

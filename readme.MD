@@ -1,6 +1,6 @@
 # Tax Rate Calculator
 
-![Tax Cal](image.PNG)
+![Tax Cal](images/image.PNG)
 
 > This is simple tax rate calculator.
 
