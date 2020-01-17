@@ -14,7 +14,7 @@
 
 ## Description
 
-A tax rate calculator. Input yearly salary and select marital status. After pressing  the calculate button the marginal tax rate will highlight. 
+A tax rate calculator. Input yearly salary(Up to nine million) and select marital status. After pressing the calculate button the marginal tax rate will highlight. 
 
 #### Technologies
 
