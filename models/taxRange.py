@@ -1,6 +1,6 @@
 # In taxRange.py
 
-from taxModel import TaxModel
+from models.taxModel import TaxModel
 
 
 

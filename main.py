@@ -4,8 +4,9 @@ from PyQt5 import QtWidgets
 
 import sys
 
-from taxrateGUI import Ui_MainWindow
-from taxResource import TaxResource
+from utils.taxrateGUI import Ui_MainWindow
+from resource.taxResource import TaxResource
+
 
 
 class myApp(QtWidgets.QMainWindow):
@@ -15,7 +16,10 @@ class myApp(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.ui.pushButton.clicked.connect(self.calculateTaxes)
+        self.ui.cal_btn.clicked.connect(self.calculateTaxes)        
+        self.ui.close_btn.clicked.connect(self.close_app)
+        self.ui.reset_btn.clicked.connect(self.reset_app)
+
         self.msg = QtWidgets.QErrorMessage()
         self.msg.setWindowTitle('Error')
 
@@ -38,8 +42,8 @@ class myApp(QtWidgets.QMainWindow):
                 self.set_color(code[0])
 
     def set_color(self, code):
-        labels = self.findChildren(QtWidgets.QFrame)
-        for label in labels:
+        
+        for label in self.get_labels():
             if code == label.objectName():
                 label.setStyleSheet('background:#A9A9A9')
 
@@ -57,6 +61,21 @@ class myApp(QtWidgets.QMainWindow):
         elif self.ui.rbAll.isChecked():
             return 'All'
 
+    def close_app(self):
+        sys.exit()
+
+    def reset_app(self):        
+        self.ui.txtSalary.clear()                
+        
+        for label in self.get_labels():
+            if label.styleSheet() == 'background:#A9A9A9':
+                label.setStyleSheet('border: 1px solid black')
+            
+    def get_labels(self):
+        labels = self.findChildren(QtWidgets.QFrame)
+        for label in labels:
+            yield label
+            
 
 if __name__ == "__main__":
     import sys

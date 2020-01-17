@@ -1,9 +1,9 @@
 # In test.py
 
 import unittest
-from taxModel import TaxModel
-from taxRange import TaxRange
-from taxResource import TaxResource
+from models.taxModel import TaxModel
+from models.taxRange import TaxRange
+from resource.taxResource import TaxResource
 
 taxResouces = TaxResource()
 
